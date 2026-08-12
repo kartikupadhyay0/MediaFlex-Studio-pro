@@ -80,7 +80,7 @@
   <div class="fixed top-[-10%] left-[-10%] w-[80vw] sm:w-[50vw] h-[80vw] sm:h-[50vw] glow-orb-1 pointer-events-none -z-10"></div>
   <div class="fixed bottom-[-10%] right-[-10%] w-[80vw] sm:w-[50vw] h-[80vw] sm:h-[50vw] glow-orb-2 pointer-events-none -z-10"></div>
 
-  <!-- Animated Floating Glass Shapes (Desktop only) -->
+  <!-- Animated Floating Glass Shapes -->
   <div class="hidden lg:block absolute top-24 left-12 w-24 h-24 rounded-3xl bg-gradient-to-br from-purple-500/20 to-indigo-500/10 border border-white/10 backdrop-blur-md pointer-events-none shadow-2xl animate-float-1"></div>
   <div class="hidden lg:block absolute top-32 right-14 w-32 h-24 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/10 border border-white/10 backdrop-blur-md pointer-events-none shadow-2xl animate-float-2"></div>
 
@@ -125,7 +125,6 @@
         The Future of Media Processing ✨
       </div>
       
-      <!-- Animated Focal Headline -->
       <h1 class="text-2xl sm:text-5xl font-black tracking-tight text-white mb-2 leading-tight">
         Transform Media <br class="hidden sm:inline" />
         <span class="animated-gradient-text drop-shadow-[0_0_25px_rgba(168,85,247,0.3)]">At The Speed Of Thought.</span>
@@ -148,8 +147,6 @@
     <section id="tool-img" class="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-2xl relative overflow-hidden shrink-0 border border-white/10">
       <div class="flex items-center justify-between gap-2 mb-4">
         <h2 class="text-xs sm:text-base font-bold text-white flex items-center gap-2.5 sm:gap-3">
-          
-          <!-- Modern Unique Glowing Icon Badge -->
           <div class="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border border-purple-500/40 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="3" width="18" height="18" rx="4" ry="4" stroke="currentColor" stroke-opacity="0.5"/>
@@ -158,7 +155,6 @@
               <path d="M12 12l3-3 6 6" stroke="currentColor" stroke-width="2" stroke-opacity="0.7"/>
             </svg>
           </div>
-
           <span class="truncate">Image Dimension & Target KB/MB Resizer</span>
         </h2>
         <span class="text-[10px] sm:text-xs text-zinc-400 font-mono bg-white/5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg border border-white/5 shrink-0">JPG, PNG, WEBP</span>
@@ -185,6 +181,11 @@
               <p id="img-dims" class="text-[10px] sm:text-xs text-zinc-400 font-mono mt-0.5"></p>
             </div>
           </div>
+          <!-- RESET / NEW FILE BUTTON -->
+          <button onclick="resetImageTool()" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-zinc-300 hover:text-white text-xs font-semibold transition-all shrink-0 flex items-center gap-1.5 border border-white/10">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            <span>Change Image</span>
+          </button>
         </div>
 
         <!-- Custom Dimensions Section -->
@@ -234,8 +235,6 @@
     <section id="tool-audio" class="hidden glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-2xl relative overflow-hidden shrink-0 border border-white/10">
       <div class="flex items-center justify-between gap-2 mb-4">
         <h2 class="text-xs sm:text-base font-bold text-white flex items-center gap-2.5 sm:gap-3">
-          
-          <!-- Modern Unique Glowing Icon Badge for Video -->
           <div class="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/40 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 18V5l12-2v13" stroke="currentColor"/>
@@ -243,7 +242,6 @@
               <circle cx="18" cy="16" r="3" fill="currentColor" fill-opacity="0.8"/>
             </svg>
           </div>
-
           <span class="truncate">Video to Audio Extractor</span>
         </h2>
         <span class="text-[10px] sm:text-xs text-zinc-400 font-mono bg-white/5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg border border-white/5 shrink-0">MP4, MOV, WEBM</span>
@@ -260,8 +258,15 @@
 
       <div id="video-controls" class="hidden mt-3 sm:mt-4 space-y-3 sm:space-y-3.5">
         <div class="bg-black/40 border border-white/10 p-3 sm:p-3.5 rounded-xl flex items-center justify-between gap-2 overflow-hidden">
-          <p id="video-name" class="font-semibold text-xs sm:text-sm text-white truncate"></p>
-          <p id="video-size" class="text-[10px] sm:text-xs text-zinc-400 font-mono shrink-0"></p>
+          <div class="min-w-0">
+            <p id="video-name" class="font-semibold text-xs sm:text-sm text-white truncate"></p>
+            <p id="video-size" class="text-[10px] sm:text-xs text-zinc-400 font-mono mt-0.5"></p>
+          </div>
+          <!-- RESET / NEW VIDEO BUTTON -->
+          <button onclick="resetVideoTool()" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-zinc-300 hover:text-white text-xs font-semibold transition-all shrink-0 flex items-center gap-1.5 border border-white/10">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            <span>Change Video</span>
+          </button>
         </div>
 
         <button onclick="extractAudio()" class="w-full gradient-button text-white font-bold py-2.5 sm:py-3 rounded-xl transition-all duration-300 shadow-[0_0_25px_rgba(6,182,212,0.4)] hover:shadow-[0_0_35px_rgba(6,182,212,0.6)] active:scale-[0.99] text-xs sm:text-sm tracking-wide">Extract Audio (WAV) →</button>
@@ -270,7 +275,7 @@
 
   </main>
 
-  <!-- Centered Footer -->
+  <!-- Footer -->
   <footer class="border-t border-white/5 py-3 px-4 sm:px-6 bg-[#07080d]/80 backdrop-blur-xl shrink-0 mt-auto">
     <div class="max-w-7xl mx-auto flex justify-center items-center text-[10px] sm:text-xs text-zinc-500">
       <p>© 2026 <span class="text-white font-semibold">MediaFlex Studio</span>. All rights reserved.</p>
@@ -292,6 +297,14 @@
 
     let loadedImage = null;
 
+    function resetImageTool() {
+      loadedImage = null;
+      document.getElementById('img-input').value = '';
+      document.getElementById('img-preview').src = '';
+      document.getElementById('img-controls').classList.add('hidden');
+      document.getElementById('img-dropzone').classList.remove('hidden');
+    }
+
     function handleImageSelect(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -309,12 +322,13 @@
         img.onload = function() {
           loadedImage = img;
           document.getElementById('img-preview').src = evt.target.result;
-          document.getElementById('img-dims').innerText = `Original Dimensions: ${img.width} x ${img.height} px`;
+          document.getElementById('img-dims').innerText = `Dimensions: ${img.width} x ${img.height} px`;
           
           document.getElementById('img-width').value = img.width;
           document.getElementById('img-height').value = img.height;
 
           document.getElementById('img-controls').classList.remove('hidden');
+          document.getElementById('img-dropzone').classList.add('hidden');
         };
         img.src = evt.target.result;
       };
@@ -406,13 +420,23 @@
     }
 
     let selectedVideo = null;
+
+    function resetVideoTool() {
+      selectedVideo = null;
+      document.getElementById('video-input').value = '';
+      document.getElementById('video-controls').classList.add('hidden');
+      document.getElementById('video-dropzone').classList.remove('hidden');
+    }
+
     function handleVideoSelect(e) {
       const file = e.target.files[0];
       if (!file) return;
       selectedVideo = file;
       document.getElementById('video-name').innerText = file.name;
       document.getElementById('video-size').innerText = (file.size / (1024*1024)).toFixed(1) + ' MB';
+      
       document.getElementById('video-controls').classList.remove('hidden');
+      document.getElementById('video-dropzone').classList.add('hidden');
     }
 
     async function extractAudio() {
