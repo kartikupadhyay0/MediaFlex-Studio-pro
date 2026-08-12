@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="hi" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MediaFlex Studio PRO — Next-Gen Media Engine</title>
+  
+  <!-- Plus Jakarta Sans Font & Tailwind CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+    }
+    
+    /* Dynamic Shimmer & Hue Animation for Headline */
+    @keyframes textGradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .animated-gradient-text {
+      background: linear-gradient(
+        90deg, 
+        #a855f7 0%, 
+        #3b82f6 25%, 
+        #06b6d4 50%, 
+        #ec4899 75%, 
+        #a855f7 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGradientFlow 5s linear infinite;
+    }
+
+    .gradient-brand {
+      background: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #06b6d4 100%);
+    }
+    .gradient-button {
+      background: linear-gradient(90deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);
+    }
+    
+    /* Ambient Glow Backgrounds */
+    .glow-orb-1 {
+      background: radial-gradient(circle, rgba(168,85,247,0.22) 0%, rgba(0,0,0,0) 70%);
+    }
+    .glow-orb-2 {
+      background: radial-gradient(circle, rgba(6,182,212,0.18) 0%, rgba(0,0,0,0) 70%);
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: rgba(15, 17, 26, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Floating Keyframe Animations */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(12deg); }
+      50% { transform: translateY(-20px) rotate(18deg); }
+    }
+    @keyframes floatReverse {
+      0%, 100% { transform: translateY(0px) rotate(-6deg); }
+      50% { transform: translateY(20px) rotate(-14deg); }
+    }
+    .animate-float-1 { animation: floatSlow 6.5s ease-in-out infinite; }
+    .animate-float-2 { animation: floatReverse 7.5s ease-in-out infinite; }
+  </style>
+</head>
+<body class="bg-[#07080d] text-zinc-100 min-h-screen flex flex-col justify-between antialiased selection:bg-indigo-500/30 selection:text-indigo-200 relative overflow-x-hidden">
+
+  <!-- Background Ambient Glow -->
+  <div class="fixed top-[-10%] left-[-10%] w-[80vw] sm:w-[50vw] h-[80vw] sm:h-[50vw] glow-orb-1 pointer-events-none -z-10"></div>
+  <div class="fixed bottom-[-10%] right-[-10%] w-[80vw] sm:w-[50vw] h-[80vw] sm:h-[50vw] glow-orb-2 pointer-events-none -z-10"></div>
+
+  <!-- Animated Floating Glass Shapes (Desktop only) -->
+  <div class="hidden lg:block absolute top-24 left-12 w-24 h-24 rounded-3xl bg-gradient-to-br from-purple-500/20 to-indigo-500/10 border border-white/10 backdrop-blur-md pointer-events-none shadow-2xl animate-float-1"></div>
+  <div class="hidden lg:block absolute top-32 right-14 w-32 h-24 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/10 border border-white/10 backdrop-blur-md pointer-events-none shadow-2xl animate-float-2"></div>
+
+  <!-- Header -->
+  <header class="border-b border-white/5 bg-[#07080d]/80 backdrop-blur-xl shrink-0 z-50 sticky top-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-3.5 flex justify-between items-center">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-2.5 sm:gap-3 group">
+        <div class="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl gradient-brand p-[1px] shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+          <div class="w-full h-full bg-[#0a0c14] rounded-[11px] flex items-center justify-center">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" fill="currentColor" fill-opacity="0.2"/>
+            </svg>
+          </div>
+          <span class="absolute -top-0.5 -right-0.5 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-pink-500 rounded-full border-2 border-[#07080d]"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-sm sm:text-base font-bold tracking-tight text-white">MediaFlex</span>
+            <span class="text-[8px] sm:text-[9px] font-extrabold uppercase tracking-widest px-1.5 py-0.5 rounded-full gradient-brand text-white shadow-sm">PRO</span>
+          </div>
+          <p class="text-[9px] sm:text-[10px] text-zinc-400 font-medium">Crafted by <span class="text-white font-semibold">Kartik Upadhyay</span></p>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs font-medium text-zinc-300">
+        <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Client-Side Engine
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 py-2 sm:py-4 flex flex-col justify-center relative z-10">
+    
+    <!-- Hero Header -->
+    <div class="text-center mb-3 sm:mb-5 shrink-0 relative">
+      <div class="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-[10px] sm:text-xs font-semibold text-indigo-300 uppercase tracking-widest mb-2 sm:mb-3">
+        <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-indigo-400 animate-ping"></span>
+        The Future of Media Processing ✨
+      </div>
+      
+      <!-- Animated Focal Headline -->
+      <h1 class="text-2xl sm:text-5xl font-black tracking-tight text-white mb-2 leading-tight">
+        Transform Media <br class="hidden sm:inline" />
+        <span class="animated-gradient-text drop-shadow-[0_0_25px_rgba(168,85,247,0.3)]">At The Speed Of Thought.</span>
+      </h1>
+      
+      <p class="text-zinc-400 text-xs sm:text-base max-w-xl mx-auto font-normal px-2">
+        Ultra-fast image resizing, format conversion, and audio extraction in your browser.
+      </p>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="flex justify-center mb-3 sm:mb-5 shrink-0">
+      <div class="p-1 sm:p-1.5 rounded-full bg-white/5 border border-white/10 flex space-x-1 sm:space-x-1.5 backdrop-blur-xl shadow-2xl w-full sm:w-auto max-w-md">
+        <button id="tab-img" onclick="switchTab('img')" class="flex-1 sm:flex-none px-3 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 gradient-button text-white shadow-[0_0_25px_rgba(59,130,246,0.5)] active:scale-95 truncate">Image Studio</button>
+        <button id="tab-audio" onclick="switchTab('audio')" class="flex-1 sm:flex-none px-3 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 text-zinc-400 hover:text-white active:scale-95 truncate">Video to Audio</button>
+      </div>
+    </div>
+
+    <!-- TOOL 1: IMAGE CONVERTER & KB/MB RESIZER -->
+    <section id="tool-img" class="glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-2xl relative overflow-hidden shrink-0 border border-white/10">
+      <div class="flex items-center justify-between gap-2 mb-4">
+        <h2 class="text-xs sm:text-base font-bold text-white flex items-center gap-2.5 sm:gap-3">
+          
+          <!-- Modern Unique Glowing Icon Badge -->
+          <div class="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border border-purple-500/40 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="4" ry="4" stroke="currentColor" stroke-opacity="0.5"/>
+              <path d="M8.5 10a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" fill="currentColor" fill-opacity="0.8"/>
+              <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 12l3-3 6 6" stroke="currentColor" stroke-width="2" stroke-opacity="0.7"/>
+            </svg>
+          </div>
+
+          <span class="truncate">Image Dimension & Target KB/MB Resizer</span>
+        </h2>
+        <span class="text-[10px] sm:text-xs text-zinc-400 font-mono bg-white/5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg border border-white/5 shrink-0">JPG, PNG, WEBP</span>
+      </div>
+      
+      <!-- Drag & Drop Zone -->
+      <div id="img-dropzone" onclick="document.getElementById('img-input').click()" class="border-2 border-dashed border-white/15 hover:border-purple-500/60 rounded-xl sm:rounded-2xl p-5 sm:p-7 text-center cursor-pointer transition-all duration-300 bg-white/[0.02] hover:bg-white/[0.05] hover:scale-[1.01] active:scale-[0.99] group shadow-inner">
+        <input type="file" id="img-input" accept="image/*" class="hidden" onchange="handleImageSelect(event)">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border border-white/15 flex items-center justify-center mx-auto mb-2 sm:mb-3 text-cyan-400 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+        </div>
+        <p class="text-white font-bold text-xs sm:text-sm mb-0.5">Click or drag & drop image here</p>
+        <p class="text-zinc-400 text-[10px] sm:text-xs">Processed 100% locally in browser</p>
+      </div>
+
+      <!-- Preview & Controls -->
+      <div id="img-controls" class="hidden mt-3 sm:mt-4 space-y-3 sm:space-y-3.5">
+        <div class="flex flex-row gap-3 items-center justify-between bg-black/40 border border-white/10 p-3 sm:p-3.5 rounded-xl">
+          <div class="flex items-center space-x-3 overflow-hidden">
+            <img id="img-preview" class="w-12 h-12 sm:w-14 sm:h-14 object-cover rounded-lg border border-white/10 shrink-0" src="" alt="Preview">
+            <div class="min-w-0">
+              <p id="img-name" class="font-semibold text-xs sm:text-sm text-white truncate"></p>
+              <p id="img-size" class="text-[10px] sm:text-xs text-cyan-400 font-mono mt-0.5"></p>
+              <p id="img-dims" class="text-[10px] sm:text-xs text-zinc-400 font-mono mt-0.5"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Dimensions Section -->
+        <div class="bg-black/30 border border-white/5 p-3 sm:p-3.5 rounded-xl">
+          <label class="block text-[10px] sm:text-xs font-bold uppercase tracking-wider text-purple-400 mb-2">Custom Dimensions (Pixels)</label>
+          <div class="grid grid-cols-2 gap-2.5 sm:gap-3">
+            <div>
+              <label class="block text-[10px] sm:text-xs text-zinc-400 mb-1">Width (px)</label>
+              <input type="number" id="img-width" placeholder="Width" class="w-full bg-black/60 border border-white/10 rounded-lg p-2 sm:p-2.5 text-xs focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none text-white font-mono">
+            </div>
+            <div>
+              <label class="block text-[10px] sm:text-xs text-zinc-400 mb-1">Height (px)</label>
+              <input type="number" id="img-height" placeholder="Height" class="w-full bg-black/60 border border-white/10 rounded-lg p-2 sm:p-2.5 text-xs focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none text-white font-mono">
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+          <!-- Target Format -->
+          <div>
+            <label class="block text-[10px] sm:text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">Target Format</label>
+            <select id="img-format" class="w-full bg-black/60 border border-white/10 rounded-lg p-2 sm:p-2.5 text-xs focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none text-white font-medium">
+              <option value="image/jpeg">JPG / JPEG</option>
+              <option value="image/png">PNG</option>
+              <option value="image/webp">WEBP</option>
+            </select>
+          </div>
+
+          <!-- Target Size & Unit Selector (KB/MB) -->
+          <div>
+            <label class="block text-[10px] sm:text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">Target File Size</label>
+            <div class="flex space-x-2">
+              <input type="number" id="target-size" placeholder="e.g. 50 or 5" class="w-full bg-black/60 border border-white/10 rounded-lg p-2 sm:p-2.5 text-xs focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none text-white font-mono" min="0.1" step="any">
+              <select id="target-unit" class="bg-black/60 border border-white/10 rounded-lg p-2 sm:p-2.5 text-xs focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none text-white font-bold shrink-0">
+                <option value="KB">KB</option>
+                <option value="MB">MB</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="processImage()" class="w-full gradient-button text-white font-bold py-2.5 sm:py-3 rounded-xl transition-all duration-300 shadow-[0_0_25px_rgba(139,92,246,0.4)] hover:shadow-[0_0_35px_rgba(139,92,246,0.6)] active:scale-[0.99] text-xs sm:text-sm tracking-wide mt-1">Convert & Resize Image →</button>
+      </div>
+    </section>
+
+    <!-- TOOL 2: VIDEO TO AUDIO EXTRACTOR -->
+    <section id="tool-audio" class="hidden glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-2xl relative overflow-hidden shrink-0 border border-white/10">
+      <div class="flex items-center justify-between gap-2 mb-4">
+        <h2 class="text-xs sm:text-base font-bold text-white flex items-center gap-2.5 sm:gap-3">
+          
+          <!-- Modern Unique Glowing Icon Badge for Video -->
+          <div class="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/40 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l12-2v13" stroke="currentColor"/>
+              <circle cx="6" cy="18" r="3" fill="currentColor" fill-opacity="0.8"/>
+              <circle cx="18" cy="16" r="3" fill="currentColor" fill-opacity="0.8"/>
+            </svg>
+          </div>
+
+          <span class="truncate">Video to Audio Extractor</span>
+        </h2>
+        <span class="text-[10px] sm:text-xs text-zinc-400 font-mono bg-white/5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg border border-white/5 shrink-0">MP4, MOV, WEBM</span>
+      </div>
+      
+      <div id="video-dropzone" onclick="document.getElementById('video-input').click()" class="border-2 border-dashed border-white/15 hover:border-cyan-500/60 rounded-xl sm:rounded-2xl p-5 sm:p-7 text-center cursor-pointer transition-all duration-300 bg-white/[0.02] hover:bg-white/[0.05] hover:scale-[1.01] active:scale-[0.99] group shadow-inner">
+        <input type="file" id="video-input" accept="video/*" class="hidden" onchange="handleVideoSelect(event)">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-white/15 flex items-center justify-center mx-auto mb-2 sm:mb-3 text-cyan-400 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+        </div>
+        <p class="text-white font-bold text-xs sm:text-sm mb-0.5">Click or drag & drop video file</p>
+        <p class="text-zinc-400 text-[10px] sm:text-xs">Extracts high quality audio locally</p>
+      </div>
+
+      <div id="video-controls" class="hidden mt-3 sm:mt-4 space-y-3 sm:space-y-3.5">
+        <div class="bg-black/40 border border-white/10 p-3 sm:p-3.5 rounded-xl flex items-center justify-between gap-2 overflow-hidden">
+          <p id="video-name" class="font-semibold text-xs sm:text-sm text-white truncate"></p>
+          <p id="video-size" class="text-[10px] sm:text-xs text-zinc-400 font-mono shrink-0"></p>
+        </div>
+
+        <button onclick="extractAudio()" class="w-full gradient-button text-white font-bold py-2.5 sm:py-3 rounded-xl transition-all duration-300 shadow-[0_0_25px_rgba(6,182,212,0.4)] hover:shadow-[0_0_35px_rgba(6,182,212,0.6)] active:scale-[0.99] text-xs sm:text-sm tracking-wide">Extract Audio (WAV) →</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Centered Footer -->
+  <footer class="border-t border-white/5 py-3 px-4 sm:px-6 bg-[#07080d]/80 backdrop-blur-xl shrink-0 mt-auto">
+    <div class="max-w-7xl mx-auto flex justify-center items-center text-[10px] sm:text-xs text-zinc-500">
+      <p>© 2026 <span class="text-white font-semibold">MediaFlex Studio</span>. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- App Script Logic -->
+  <script>
+    function switchTab(tab) {
+      document.getElementById('tool-img').classList.toggle('hidden', tab !== 'img');
+      document.getElementById('tool-audio').classList.toggle('hidden', tab !== 'audio');
+      
+      const activeBtn = 'flex-1 sm:flex-none px-3 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 gradient-button text-white shadow-[0_0_25px_rgba(59,130,246,0.5)] active:scale-95 truncate';
+      const inactiveBtn = 'flex-1 sm:flex-none px-3 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 text-zinc-400 hover:text-white active:scale-95 truncate';
+
+      document.getElementById('tab-img').className = tab === 'img' ? activeBtn : inactiveBtn;
+      document.getElementById('tab-audio').className = tab === 'audio' ? activeBtn : inactiveBtn;
+    }
+
+    let loadedImage = null;
+
+    function handleImageSelect(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      document.getElementById('img-name').innerText = file.name;
+      const sizeFormatted = file.size > 1024 * 1024 
+        ? (file.size / (1024 * 1024)).toFixed(2) + ' MB' 
+        : (file.size / 1024).toFixed(1) + ' KB';
+        
+      document.getElementById('img-size').innerText = 'Original Size: ' + sizeFormatted;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const img = new Image();
+        img.onload = function() {
+          loadedImage = img;
+          document.getElementById('img-preview').src = evt.target.result;
+          document.getElementById('img-dims').innerText = `Original Dimensions: ${img.width} x ${img.height} px`;
+          
+          document.getElementById('img-width').value = img.width;
+          document.getElementById('img-height').value = img.height;
+
+          document.getElementById('img-controls').classList.remove('hidden');
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function processImage() {
+      if (!loadedImage) return;
+
+      const format = document.getElementById('img-format').value;
+      const rawSize = parseFloat(document.getElementById('target-size').value);
+      const unit = document.getElementById('target-unit').value;
+      const ext = format.split('/')[1].replace('jpeg', 'jpg');
+
+      let customWidth = parseInt(document.getElementById('img-width').value) || loadedImage.width;
+      let customHeight = parseInt(document.getElementById('img-height').value) || loadedImage.height;
+
+      let canvas = document.createElement('canvas');
+      canvas.width = customWidth;
+      canvas.height = customHeight;
+      let ctx = canvas.getContext('2d');
+      ctx.drawImage(loadedImage, 0, 0, customWidth, customHeight);
+
+      if (!rawSize || rawSize <= 0) {
+        canvas.toBlob((blob) => {
+          triggerBlobDownload(blob, `resized-${customWidth}x${customHeight}.${ext}`);
+        }, format, 0.9);
+        return;
+      }
+
+      let targetBytes = Math.round(unit === 'MB' ? rawSize * 1024 * 1024 : rawSize * 1024);
+
+      let quality = 0.95;
+      let initialBlob = await canvasToBlob(canvas, format, quality);
+
+      if (initialBlob.size > targetBytes) {
+        let scaleFactor = 1.0;
+        let currentBlob = initialBlob;
+
+        for (let attempt = 0; attempt < 25; attempt++) {
+          canvas = document.createElement('canvas');
+          const w = Math.max(Math.floor(customWidth * scaleFactor), 50);
+          const h = Math.max(Math.floor(customHeight * scaleFactor), 50);
+          canvas.width = w;
+          canvas.height = h;
+
+          ctx = canvas.getContext('2d');
+          ctx.drawImage(loadedImage, 0, 0, canvas.width, canvas.height);
+
+          currentBlob = await canvasToBlob(canvas, format, quality);
+
+          if (currentBlob.size <= targetBytes) break;
+
+          if (quality > 0.15) {
+            quality -= 0.04;
+          } else {
+            scaleFactor *= 0.92;
+          }
+        }
+        triggerBlobDownload(currentBlob, `resized-${customWidth}x${customHeight}-${rawSize}${unit}.${ext}`);
+      } 
+      else {
+        let bytesNeeded = targetBytes - initialBlob.size;
+        if (bytesNeeded > 0) {
+          const imageBuffer = await initialBlob.arrayBuffer();
+          const paddingBuffer = new Uint8Array(bytesNeeded);
+          
+          const finalBlob = new Blob([imageBuffer, paddingBuffer], { type: format });
+          triggerBlobDownload(finalBlob, `resized-${customWidth}x${customHeight}-${rawSize}${unit}.${ext}`);
+        } else {
+          triggerBlobDownload(initialBlob, `resized-${customWidth}x${customHeight}-${rawSize}${unit}.${ext}`);
+        }
+      }
+    }
+
+    function canvasToBlob(canvas, format, quality) {
+      return new Promise((resolve) => {
+        canvas.toBlob((blob) => resolve(blob), format, quality);
+      });
+    }
+
+    function triggerBlobDownload(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const downloadLink = document.createElement('a');
+      downloadLink.href = url;
+      downloadLink.download = filename;
+      downloadLink.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    let selectedVideo = null;
+    function handleVideoSelect(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      selectedVideo = file;
+      document.getElementById('video-name').innerText = file.name;
+      document.getElementById('video-size').innerText = (file.size / (1024*1024)).toFixed(1) + ' MB';
+      document.getElementById('video-controls').classList.remove('hidden');
+    }
+
+    async function extractAudio() {
+      if (!selectedVideo) return;
+      
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const arrayBuffer = await selectedVideo.arrayBuffer();
+      const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+
+      const offlineCtx = new OfflineAudioContext(audioBuffer.numberOfChannels, audioBuffer.length, audioBuffer.sampleRate);
+      const source = offlineCtx.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(offlineCtx.destination);
+      source.start();
+
+      const renderedBuffer = await offlineCtx.startRendering();
+      const wavBlob = bufferToWave(renderedBuffer, renderedBuffer.length);
+
+      const url = URL.createObjectURL(wavBlob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `extracted-audio.wav`;
+      a.click();
+    }
+
+    function bufferToWave(abuffer, len) {
+      let numOfChan = abuffer.numberOfChannels,
+          length = len * numOfChan * 2 + 44,
+          buffer = new ArrayBuffer(length),
+          view = new DataView(buffer),
+          channels = [], i, sample, offset = 0, pos = 0;
+
+      function setUint16(data) { view.setUint16(pos, data, true); pos += 2; }
+      function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
+
+      setUint32(0x46464952); setUint32(length - 8); setUint32(0x45564157);
+      setUint32(0x20746d66); setUint32(16); setUint16(1); setUint16(numOfChan);
+      setUint32(abuffer.sampleRate); setUint32(abuffer.sampleRate * 2 * numOfChan);
+      setUint16(numOfChan * 2); setUint16(16); setUint32(0x61746164); setUint32(length - pos - 4);
+
+      for (i = 0; i < abuffer.numberOfChannels; i++) channels.push(abuffer.getChannelData(i));
+
+      while (pos < length) {
+        for (i = 0; i < numOfChan; i++) {
+          sample = Math.max(-1, Math.min(1, channels[i][offset]));
+          sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767) | 0;
+          view.setInt16(pos, sample, true); pos += 2;
+        }
+        offset++;
+      }
+      return new Blob([buffer], { type: "audio/wav" });
+    }
+  </script>
+</body>
+</html>
