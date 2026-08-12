@@ -112,16 +112,20 @@
 
       <!-- Right Header Actions -->
       <div class="flex items-center gap-2">
-        <!-- Install App Button (Shown when PWA install prompt is available) -->
-        <button id="install-btn" onclick="installApp()" class="hidden px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-[10px] sm:text-xs font-bold text-white shadow-lg transition-all items-center gap-1.5 active:scale-95 border border-purple-400/30">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-          <span>Install App</span>
+        
+        <!-- IN-WEBSITE DOWNLOAD APP BUTTON (ALWAYS VISIBLE) -->
+        <button onclick="downloadApp()" class="px-3 sm:px-4 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-[11px] sm:text-xs font-bold text-white shadow-[0_0_15px_rgba(6,182,212,0.4)] hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-all flex items-center gap-1.5 active:scale-95 border border-white/20 cursor-pointer">
+          <svg class="w-3.5 h-3.5 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+          </svg>
+          <span>Download App</span>
         </button>
 
-        <div class="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs font-medium text-zinc-300">
+        <div class="hidden sm:flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs font-medium text-zinc-300">
           <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           Client-Side Engine
         </div>
+
       </div>
 
     </div>
@@ -317,7 +321,7 @@
     const manifestURL = URL.createObjectURL(blobManifest);
     document.getElementById('manifest-placeholder').setAttribute('href', manifestURL);
 
-    // Register dummy Service Worker for PWA eligibility
+    // Register Service Worker for PWA
     if ('serviceWorker' in navigator) {
       const swCode = `self.addEventListener('fetch', (e) => { e.respondWith(fetch(e.request)); });`;
       const swBlob = new Blob([swCode], { type: 'application/javascript' });
@@ -325,26 +329,23 @@
       navigator.serviceWorker.register(swUrl).catch(() => {});
     }
 
-    // PWA Install Prompt Handler
+    // Direct App Download Handler
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      const installBtn = document.getElementById('install-btn');
-      if(installBtn) {
-        installBtn.classList.remove('hidden');
-        installBtn.classList.add('flex');
-      }
     });
 
-    async function installApp() {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        document.getElementById('install-btn').classList.add('hidden');
+    async function downloadApp() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          deferredPrompt = null;
+        }
+      } else {
+        alert("App Download Karne Ke Liye:\n\n1. Browser ke URL Bar ke right side me 'Download/Install' Icon par click karein.\n\nYA\n\n2. Right side Three Dots (⋮) -> 'Save and share' -> 'Install MediaFlex Studio' par click karein!");
       }
-      deferredPrompt = null;
     }
 
     function switchTab(tab) {
