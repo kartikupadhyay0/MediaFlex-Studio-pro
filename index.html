@@ -11,15 +11,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Dynamic PWA Web Manifest -->
-  <link rel="manifest" id="manifest-placeholder">
+  <!-- External Static Manifest File for PWA -->
+  <link rel="manifest" href="/manifest.json">
 
   <style>
     body { 
       font-family: 'Plus Jakarta Sans', sans-serif; 
     }
     
-    /* Dynamic Shimmer & Hue Animation for Headline */
     @keyframes textGradientFlow {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -48,7 +47,6 @@
       background: linear-gradient(90deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);
     }
     
-    /* Ambient Glow Backgrounds */
     .glow-orb-1 {
       background: radial-gradient(circle, rgba(168,85,247,0.22) 0%, rgba(0,0,0,0) 70%);
     }
@@ -56,7 +54,6 @@
       background: radial-gradient(circle, rgba(6,182,212,0.18) 0%, rgba(0,0,0,0) 70%);
     }
 
-    /* Glassmorphism Cards */
     .glass-card {
       background: rgba(15, 17, 26, 0.75);
       backdrop-filter: blur(24px);
@@ -64,7 +61,6 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* Floating Keyframe Animations */
     @keyframes floatSlow {
       0%, 100% { transform: translateY(0px) rotate(12deg); }
       50% { transform: translateY(-20px) rotate(18deg); }
@@ -113,7 +109,7 @@
       <!-- Right Header Actions -->
       <div class="flex items-center gap-2">
         
-        <!-- IN-WEBSITE DOWNLOAD APP BUTTON (ALWAYS VISIBLE) -->
+        <!-- DIRECT PWA DOWNLOAD BUTTON -->
         <button onclick="downloadApp()" class="px-3 sm:px-4 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-[11px] sm:text-xs font-bold text-white shadow-[0_0_15px_rgba(6,182,212,0.4)] hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-all flex items-center gap-1.5 active:scale-95 border border-white/20 cursor-pointer">
           <svg class="w-3.5 h-3.5 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -197,14 +193,12 @@
               <p id="img-dims" class="text-[10px] sm:text-xs text-zinc-400 font-mono mt-0.5"></p>
             </div>
           </div>
-          <!-- RESET / NEW FILE BUTTON -->
           <button onclick="resetImageTool()" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-zinc-300 hover:text-white text-xs font-semibold transition-all shrink-0 flex items-center gap-1.5 border border-white/10">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
             <span>Change Image</span>
           </button>
         </div>
 
-        <!-- Custom Dimensions Section -->
         <div class="bg-black/30 border border-white/5 p-3 sm:p-3.5 rounded-xl">
           <label class="block text-[10px] sm:text-xs font-bold uppercase tracking-wider text-purple-400 mb-2">Custom Dimensions (Pixels)</label>
           <div class="grid grid-cols-2 gap-2.5 sm:gap-3">
@@ -220,7 +214,6 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-          <!-- Target Format -->
           <div>
             <label class="block text-[10px] sm:text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">Target Format</label>
             <select id="img-format" class="w-full bg-black/60 border border-white/10 rounded-lg p-2 sm:p-2.5 text-xs focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none text-white font-medium">
@@ -230,7 +223,6 @@
             </select>
           </div>
 
-          <!-- Target Size & Unit Selector (KB/MB) -->
           <div>
             <label class="block text-[10px] sm:text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">Target File Size</label>
             <div class="flex space-x-2">
@@ -278,7 +270,6 @@
             <p id="video-name" class="font-semibold text-xs sm:text-sm text-white truncate"></p>
             <p id="video-size" class="text-[10px] sm:text-xs text-zinc-400 font-mono mt-0.5"></p>
           </div>
-          <!-- RESET / NEW VIDEO BUTTON -->
           <button onclick="resetVideoTool()" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-zinc-300 hover:text-white text-xs font-semibold transition-all shrink-0 flex items-center gap-1.5 border border-white/10">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
             <span>Change Video</span>
@@ -298,44 +289,21 @@
     </div>
   </footer>
 
-  <!-- App Script Logic -->
+  <!-- App Logic -->
   <script>
-    // Inline PWA Manifest Creation
-    const manifestData = {
-      "name": "MediaFlex Studio PRO",
-      "short_name": "MediaFlex",
-      "start_url": "/",
-      "display": "standalone",
-      "background_color": "#07080d",
-      "theme_color": "#07080d",
-      "icons": [
-        {
-          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23a855f7'/><text x='50%' y='65%' font-size='60' text-anchor='middle' fill='white'>M</text></svg>",
-          "sizes": "192x192 512x512",
-          "type": "image/svg+xml"
-        }
-      ]
-    };
-    const stringManifest = JSON.stringify(manifestData);
-    const blobManifest = new Blob([stringManifest], {type: 'application/json'});
-    const manifestURL = URL.createObjectURL(blobManifest);
-    document.getElementById('manifest-placeholder').setAttribute('href', manifestURL);
-
-    // Register Service Worker for PWA
+    // 1. Register External Service Worker
     if ('serviceWorker' in navigator) {
-      const swCode = `self.addEventListener('fetch', (e) => { e.respondWith(fetch(e.request)); });`;
-      const swBlob = new Blob([swCode], { type: 'application/javascript' });
-      const swUrl = URL.createObjectURL(swBlob);
-      navigator.serviceWorker.register(swUrl).catch(() => {});
+      navigator.serviceWorker.register('/sw.js').catch((err) => console.log(err));
     }
 
-    // Direct App Download Handler
+    // 2. Direct PWA Prompt Event Capture
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
     });
 
+    // 3. Direct Download Button Handler (Bina faltu text/popup ke direct browser prompt open karega)
     async function downloadApp() {
       if (deferredPrompt) {
         deferredPrompt.prompt();
@@ -344,7 +312,7 @@
           deferredPrompt = null;
         }
       } else {
-        alert("App Download Karne Ke Liye:\n\n1. Browser ke URL Bar ke right side me 'Download/Install' Icon par click karein.\n\nYA\n\n2. Right side Three Dots (⋮) -> 'Save and share' -> 'Install MediaFlex Studio' par click karein!");
+        console.log("Install prompt not available yet or app is already installed.");
       }
     }
 
