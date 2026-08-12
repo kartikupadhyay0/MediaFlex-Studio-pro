@@ -11,6 +11,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Dynamic PWA Web Manifest -->
+  <link rel="manifest" id="manifest-placeholder">
+
   <style>
     body { 
       font-family: 'Plus Jakarta Sans', sans-serif; 
@@ -107,9 +110,18 @@
         </div>
       </a>
 
-      <div class="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs font-medium text-zinc-300">
-        <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Client-Side Engine
+      <!-- Right Header Actions -->
+      <div class="flex items-center gap-2">
+        <!-- Install App Button (Shown when PWA install prompt is available) -->
+        <button id="install-btn" onclick="installApp()" class="hidden px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-[10px] sm:text-xs font-bold text-white shadow-lg transition-all items-center gap-1.5 active:scale-95 border border-purple-400/30">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <span>Install App</span>
+        </button>
+
+        <div class="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs font-medium text-zinc-300">
+          <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Client-Side Engine
+        </div>
       </div>
 
     </div>
@@ -284,6 +296,57 @@
 
   <!-- App Script Logic -->
   <script>
+    // Inline PWA Manifest Creation
+    const manifestData = {
+      "name": "MediaFlex Studio PRO",
+      "short_name": "MediaFlex",
+      "start_url": "/",
+      "display": "standalone",
+      "background_color": "#07080d",
+      "theme_color": "#07080d",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23a855f7'/><text x='50%' y='65%' font-size='60' text-anchor='middle' fill='white'>M</text></svg>",
+          "sizes": "192x192 512x512",
+          "type": "image/svg+xml"
+        }
+      ]
+    };
+    const stringManifest = JSON.stringify(manifestData);
+    const blobManifest = new Blob([stringManifest], {type: 'application/json'});
+    const manifestURL = URL.createObjectURL(blobManifest);
+    document.getElementById('manifest-placeholder').setAttribute('href', manifestURL);
+
+    // Register dummy Service Worker for PWA eligibility
+    if ('serviceWorker' in navigator) {
+      const swCode = `self.addEventListener('fetch', (e) => { e.respondWith(fetch(e.request)); });`;
+      const swBlob = new Blob([swCode], { type: 'application/javascript' });
+      const swUrl = URL.createObjectURL(swBlob);
+      navigator.serviceWorker.register(swUrl).catch(() => {});
+    }
+
+    // PWA Install Prompt Handler
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const installBtn = document.getElementById('install-btn');
+      if(installBtn) {
+        installBtn.classList.remove('hidden');
+        installBtn.classList.add('flex');
+      }
+    });
+
+    async function installApp() {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        document.getElementById('install-btn').classList.add('hidden');
+      }
+      deferredPrompt = null;
+    }
+
     function switchTab(tab) {
       document.getElementById('tool-img').classList.toggle('hidden', tab !== 'img');
       document.getElementById('tool-audio').classList.toggle('hidden', tab !== 'audio');
